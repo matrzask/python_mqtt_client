@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print(f"Connected with result code {reason_code}")
-    client.publish("info/connect", "Python client connected", 0)
+    client.publish("/info/connect", "Python client connected", 0)
     client.subscribe("/battery/level", 0)
     client.subscribe("/info/connect", 0)
     client
@@ -22,7 +22,6 @@ if __name__ == '__main__':
     client.on_subscribe = on_subscribe
     client.on_message = on_message
 
-    #client.tls_set('root.ca', certfile='c1.crt', keyfile='c1.key')
     client.connect("localhost", 1883, 60)
 
     client.loop_forever()
